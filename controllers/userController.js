@@ -20,10 +20,22 @@ const registerUser = asyncHandler(async (req, res) => {
 
   //* Create hash password
   const hashedPassword = await bcrypt.hash(password, 10);
-  console.log(hashedPassword);
-  res.json({
-    message: "Register the user",
+
+  const user = await User.create({
+    userName,
+    email,
+    password: hashedPassword,
   });
+
+  if (user) {
+    res.status(201).json({
+      _id: user.id,
+      email: user.email,
+    });
+  } else {
+    res.status(404);
+    throw new Error("User data not found");
+  }
 });
 
 //* method : post
