@@ -11,6 +11,7 @@ const app = express();
 bodyParser.urlencoded({ extended: false });
 app.use(bodyParser.json());
 app.use("/api/contacts", require("./routes/contactRoutes"));
+app.use("/api/users", require("./routes/userRoutes"));
 app.use(errorHandler);
 
 app.get("/", (req, res) => {
