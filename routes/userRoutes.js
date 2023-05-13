@@ -5,9 +5,10 @@ const {
   loginUser,
   currentUser,
 } = require("../controllers/userController");
+const validationToken = require("../middleware/validationTokenHandler");
 
 router.post("/register", registerUser);
 router.post("/login", loginUser);
-router.get("/current", currentUser);
+router.get("/current", validationToken, currentUser);
 
 module.exports = router;
